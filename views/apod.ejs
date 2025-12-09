@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nasa apod viewer</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>nasa apod viewer</h1>
+      <nav>
+        <a href="/">home</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="search-section">
+        <h2>choose a date</h2>
+        <form action="/apod/fetch" method="POST">
+          <label for="date">date:</label>
+          <input type="date" id="date" name="date" required />
+          <button type="submit">get picture</button>
+        </form>
+      </section>
+
+      <section class="apod-section">
+        <h2>picture of the day</h2>
+
+        <% if (apod) { %>
+        <div class="apod-card">
+          <h3><%= apod.title %> (<%= apod.date %>)</h3>
+
+          <% if (apod.mediaType === 'image') { %>
+          <img src="<%= apod.imageUrl %>" alt="astronomy picture of the day" />
+          <% } else { %>
+          <p>this apod is a video. view it here:</p>
+          <a href="<%= apod.imageUrl %>" target="_blank" rel="noopener noreferrer">
+            open video
+          </a>
+          <% } %>
+
+          <p class="explanation"><%= apod.explanation %></p>
+
+          <form action="/apod/save" method="POST">
+            <input type="hidden" name="date" value="<%= apod.date %>" />
+            <input type="hidden" name="title" value="<%= apod.title %>" />
+            <input type="hidden" name="explanation" value="<%= apod.explanation %>" />
+            <input type="hidden" name="mediaType" value="<%= apod.mediaType %>" />
+            <input type="hidden" name="imageUrl" value="<%= apod.imageUrl %>" />
+            <input type="hidden" name="hdImageUrl" value="<%= apod.hdImageUrl %>" />
+            <button type="submit">save to favorites</button>
+          </form>
+        </div>
+        <% } else { %>
+        <p>no picture selected yet. choose a date above.</p>
+        <% } %>
+      </section>
+
+      <section class="favorites-section">
+        <h2>saved favorites</h2>
+        <% if (favorites && favorites.length > 0) { %>
+        <ul class="favorites-list">
+          <% favorites.forEach(function (fav) { %>
+          <li class="favorite-item">
+            <h3><%= fav.title %> (<%= fav.date %>)</h3>
+            <% if (fav.mediaType === 'image' && fav.imageUrl) { %>
+            <img src="<%= fav.imageUrl %>" alt="favorite apod" />
+            <% } %>
+
+            <form action="/apod/delete/<%= fav._id %>" method="POST">
+              <button type="submit">remove</button>
+            </form>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p>you have no saved favorites yet.</p>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>
