@@ -1,33 +1,53 @@
 /* base layout */
 
+/* this makes padding and borders behave nicely across the whole page */
 * {
   box-sizing: border-box;
 }
 
+/* main body styles: global font, background, text color, and base sizing */
 body {
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top, #1f2933 0, #020617 45%, #000000 100%);
+  background: radial-gradient(
+    circle at top,
+    #1f2933 0,
+    #020617 45%,
+    #000000 100%
+  );
   color: #e5e7eb; /* required: color */
   font-size: 16px; /* required: font-size */
   margin: 0;
   padding: 0;
 }
 
-/* subtle star-like background dots */
+/* subtle star-like background dots so the page feels more space-themed */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.12) 0, transparent 45%),
-    radial-gradient(circle at 80% 10%, rgba(125, 211, 252, 0.18) 0, transparent 55%),
-    radial-gradient(circle at 50% 90%, rgba(191, 219, 254, 0.18) 0, transparent 50%);
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.12) 0,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(125, 211, 252, 0.18) 0,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(191, 219, 254, 0.18) 0,
+      transparent 50%
+    );
   opacity: 0.2;
-  pointer-events: none;
+  pointer-events: none; /* this makes sure the background doesn’t block clicks */
   z-index: -1;
 }
 
 /* header */
 
+/* sticky header that stays at the top with a subtle gradient */
 header {
   background: linear-gradient(90deg, #111827, #1f2937);
   padding: 1.25rem 0.75rem;
@@ -38,6 +58,7 @@ header {
   z-index: 10;
 }
 
+/* main title in the header */
 header h1 {
   margin: 0;
   font-size: 1.8rem;
@@ -45,22 +66,26 @@ header h1 {
   text-transform: uppercase;
 }
 
+/* nav container under the title (currently just simple links) */
 header nav {
   margin-top: 0.5rem;
 }
 
+/* header navigation links */
 header nav a {
   color: #93c5fd;
   text-decoration: none;
   font-size: 0.95rem;
 }
 
+/* underline the nav links on hover so they feel clickable */
 header nav a:hover {
   text-decoration: underline;
 }
 
 /* main container */
 
+/* main content card in the center of the page */
 main {
   max-width: 1000px;
   margin: 2rem auto;
@@ -69,31 +94,36 @@ main {
   border-radius: 16px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(148, 163, 184, 0.3);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); /* glassmorphism vibe */
 }
 
+/* give sections some breathing room */
 section {
   margin-bottom: 2.5rem;
 }
 
+/* consistent styling for section titles */
 h2 {
   margin: 0 0 0.75rem 0;
   font-size: 1.3rem;
   color: #e5e7eb;
 }
 
+/* base paragraph styling */
 p {
   margin: 0.25rem 0;
 }
 
 /* landing page hero */
 
+/* main container for the landing page content */
 .landing-main {
   max-width: 1000px;
   margin: 2.5rem auto;
   padding: 1.5rem 1.75rem;
 }
 
+/* hero layout: text on the left, orbit card on the right */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -101,17 +131,20 @@ p {
   align-items: center;
 }
 
+/* on smaller screens, stack hero content vertically */
 @media (max-width: 800px) {
   .hero {
     grid-template-columns: 1fr;
   }
 }
 
+/* main hero heading on the landing page */
 .hero-text h2 {
   font-size: 2.1rem;
   margin-bottom: 0.5rem;
 }
 
+/* small pill above the hero title to mark this as the cmsc335 project */
 .hero-tag {
   display: inline-block;
   padding: 0.25rem 0.7rem;
@@ -124,6 +157,7 @@ p {
   color: #bfdbfe;
 }
 
+/* description text under the hero title */
 .hero-subtitle {
   margin-top: 0.5rem;
   font-size: 0.98rem;
@@ -131,18 +165,25 @@ p {
   max-width: 32rem;
 }
 
+/* wrapper for the launch button and small note text */
 .hero-actions {
   margin-top: 1.25rem;
 }
 
+/* small note under the launch button (extra context for the user) */
 .hero-note {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #9ca3af;
 }
 
+/* right side hero card with the orbit / planet graphic */
 .hero-card {
-  background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 60%),
+  background: radial-gradient(
+      circle at top right,
+      rgba(96, 165, 250, 0.22),
+      transparent 60%
+    ),
     rgba(15, 23, 42, 0.98);
   border-radius: 18px;
   padding: 1.25rem 1.25rem 1.5rem;
@@ -150,22 +191,27 @@ p {
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
 }
 
+/* header text inside the hero card */
 .hero-card-header {
-  font-size: 0.92rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
+  text-align: center;
   color: #a5b4fc;
   border-bottom: 1px solid rgba(148, 163, 184, 0.5);
   padding-bottom: 0.6rem;
   margin-bottom: 0.8rem;
 }
 
+/* body of the hero card: orbit graphic + small explanation text */
 .hero-card-body {
   position: relative;
+  text-align: center;
   min-height: 140px;
   padding-top: 1rem;
 }
 
+/* dashed circular orbit that slowly spins */
 .hero-orbit {
   width: 140px;
   height: 140px;
@@ -173,20 +219,33 @@ p {
   border: 1px dashed rgba(148, 163, 184, 0.5);
   margin: 0 auto 0.75rem;
   position: relative;
+  animation: slow-spin 18s linear infinite;
 }
 
+/* little glowing planet sitting on the orbit */
 .hero-planet {
   width: 46px;
   height: 46px;
   border-radius: 999px;
   background: radial-gradient(circle at 30% 30%, #fbbf24, #ea580c);
   position: absolute;
-  top: 50%;
+  top: 16%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 18px 40px rgba(251, 191, 36, 0.5);
 }
 
+/* subtle spinning animation for the orbit ring */
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* smaller descriptive text in the hero card */
 .hero-card-text {
   font-size: 0.9rem;
   color: #d1d5db;
@@ -194,15 +253,18 @@ p {
 
 /* links & primary CTA */
 
+/* default styles for normal links */
 a {
   color: #93c5fd;
   text-decoration: none;
 }
 
+/* underline links on hover so users know they can click */
 a:hover {
   text-decoration: underline;
 }
 
+/* main “call to action” button style (e.g., launch viewer) */
 .primary-link {
   display: inline-block;
   margin-top: 0.35rem;
@@ -217,6 +279,7 @@ a:hover {
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
 }
 
+/* small hover lift and stronger glow on the main cta */
 .primary-link:hover {
   transform: translateY(-1px);
   background: linear-gradient(135deg, #1d4ed8, #4338ca);
@@ -225,6 +288,7 @@ a:hover {
 
 /* section captions */
 
+/* lighter, smaller explanatory text under section headers */
 .section-caption {
   font-size: 0.9rem;
   color: #9ca3af;
@@ -233,14 +297,20 @@ a:hover {
 
 /* search section */
 
+/* container around the date search form */
 .search-section {
   padding: 1.25rem 1.25rem 1.75rem;
   border-radius: 14px;
-  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 65%),
+  background: radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.18),
+      transparent 65%
+    ),
     rgba(15, 23, 42, 0.9);
   border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
+/* layout for the form: line things up and leave some gaps */
 .search-section form {
   margin-top: 0.75rem;
   display: flex;
@@ -249,6 +319,7 @@ a:hover {
   align-items: center;
 }
 
+/* label next to the date picker */
 .search-section label {
   font-size: 0.95rem;
   color: #cbd5f5;
@@ -256,6 +327,7 @@ a:hover {
 
 /* form controls */
 
+/* styling for the native date input */
 input[type="date"] {
   padding: 0.45rem 0.65rem;
   font-size: 0.96rem;
@@ -265,9 +337,11 @@ input[type="date"] {
   color: #e5e7eb;
   outline: none;
   min-width: 170px;
-  transition: border 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  transition: border 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
 }
 
+/* highlight the date input when the user focuses it */
 input[type="date"]:focus {
   border-color: #60a5fa;
   box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.7);
@@ -276,6 +350,7 @@ input[type="date"]:focus {
 
 /* buttons */
 
+/* base button styles for all buttons in the app */
 button {
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
@@ -290,12 +365,14 @@ button {
   box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
 }
 
+/* slight hover lift and stronger glow on buttons */
 button:hover {
   transform: translateY(-1px);
   background: linear-gradient(135deg, #1d4ed8, #4338ca);
   box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
 }
 
+/* pressed state to make buttons feel clickable */
 button:active {
   transform: translateY(0);
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
@@ -303,12 +380,18 @@ button:active {
 
 /* apod card */
 
+/* container for the current apod display card */
 .apod-section {
   margin-top: 2rem;
 }
 
+/* main apod card styles (background, border, shadow, animation) */
 .apod-card {
-  background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 60%),
+  background: radial-gradient(
+      circle at top right,
+      rgba(96, 165, 250, 0.22),
+      transparent 60%
+    ),
     rgba(15, 23, 42, 0.95);
   border-radius: 16px;
   padding: 1.5rem;
@@ -317,17 +400,20 @@ button:active {
   animation: fadeIn 0.35s ease-out;
 }
 
+/* top area of the apod card: date pill + title */
 .apod-card-header {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
+/* old h3 style for titles (kept just in case we use h3 somewhere) */
 .apod-card-header h3 {
   margin: 0;
   font-size: 1.3rem;
 }
 
+/* apod main image styles */
 .apod-card img {
   max-width: 100%;
   max-height: 420px;
@@ -338,10 +424,12 @@ button:active {
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8);
 }
 
+/* spacing above the save-to-favorites button group */
 .apod-actions {
   margin-top: 0.75rem;
 }
 
+/* explanation paragraph under the image/video */
 .explanation {
   margin-top: 0.75rem;
   line-height: 1.55;
@@ -351,6 +439,7 @@ button:active {
 
 /* pills for metadata */
 
+/* generic “pill” shape used for date and other tags */
 .pill {
   display: inline-block;
   padding: 0.18rem 0.6rem;
@@ -360,10 +449,12 @@ button:active {
   color: #e5e7eb;
 }
 
+/* pill specifically used for dates */
 .pill-date {
   background-color: rgba(15, 23, 42, 0.9);
 }
 
+/* pill-type is not currently used, but kept in case we want type tags later */
 .pill-type {
   background-color: rgba(37, 99, 235, 0.25);
   border-color: rgba(96, 165, 250, 0.8);
@@ -372,6 +463,7 @@ button:active {
 
 /* video placeholder */
 
+/* box that shows up when nasa returns a video instead of an image */
 .video-placeholder {
   margin-top: 0.75rem;
   padding: 0.75rem 0.9rem;
@@ -380,6 +472,7 @@ button:active {
   border: 1px dashed rgba(148, 163, 184, 0.7);
 }
 
+/* text inside the video placeholder */
 .video-placeholder p {
   font-size: 0.9rem;
   color: #d1d5db;
@@ -387,10 +480,12 @@ button:active {
 
 /* favorites list */
 
+/* section wrapper for all saved favorites */
 .favorites-section {
   margin-top: 2.5rem;
 }
 
+/* favorites displayed in a responsive grid */
 .favorites-list {
   list-style-type: none;
   padding-left: 0;
@@ -400,28 +495,41 @@ button:active {
   gap: 1.25rem;
 }
 
+/* each individual favorite card */
 .favorite-item {
   background: rgba(15, 23, 42, 0.95);
   border-radius: 14px;
   padding: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
 
+/* subtle hover lift effect for favorites so they feel interactive */
+.favorite-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
+  border-color: rgba(129, 140, 248, 0.85);
+}
+
+/* header area inside each favorite card (date + title) */
 .favorite-header {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
+/* favorite title text */
 .favorite-header h3 {
   margin: 0;
   font-size: 1rem;
 }
 
+/* small thumbnail image for each favorite (if it is an image apod) */
 .favorite-item img {
   max-width: 100%;
   max-height: 160px;
@@ -430,12 +538,14 @@ button:active {
   margin-top: 0.4rem;
 }
 
+/* wrapper for the delete button under each favorite */
 .favorite-actions {
   margin-top: 0.5rem;
 }
 
 /* empty state */
 
+/* message box when there are no results or no favorites yet */
 .empty-state {
   margin-top: 0.75rem;
   padding: 0.9rem 1rem;
@@ -448,6 +558,7 @@ button:active {
 
 /* animations */
 
+/* fade-in animation used for cards so they appear more smoothly */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -457,4 +568,79 @@ button:active {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* apod layout polish */
+
+/* extra spacing tweak for the apod section heading */
+.apod-section {
+  margin-top: 2rem;
+}
+
+/* tighten up spacing under the "picture of the day" section title */
+.apod-section h2 {
+  margin-bottom: 0.5rem;
+}
+
+/* limit the width of the apod card and center it */
+.apod-card {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* align the header content inside the apod card to the left */
+.apod-card-header {
+  align-items: flex-start;
+}
+
+/* slightly larger default h3 size in case it’s used */
+.apod-card-header h3 {
+  font-size: 1.4rem;
+}
+
+/* allow a taller max height for the main apod image */
+.apod-card img {
+  max-height: 480px;
+}
+
+/* mobile tweaks */
+
+/* adjustments for smaller screens like phones or small laptops */
+@media (max-width: 640px) {
+  /* reduce margins/padding on the main card so it fits better */
+  main {
+    margin: 1.25rem;
+    padding: 1rem;
+  }
+
+  /* shrink the header title a bit on mobile */
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  /* stack the search form vertically on narrow screens */
+  .search-section form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* slightly tighter padding for the apod card on mobile */
+  .apod-card {
+    padding: 1.1rem;
+  }
+
+  /* favorites should show one card per row on small screens */
+  .favorites-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* main title for the current apod (the "image: ..." text) */
+.apod-title {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #f3f4f6;
+  letter-spacing: 0.02em;
+  font-weight: 600;
 }

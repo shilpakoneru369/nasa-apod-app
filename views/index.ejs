@@ -2,13 +2,18 @@
 <html>
   <head>
     <title>nasa apod home</title>
+
+    <!-- main stylesheet for the app -->
     <link rel="stylesheet" href="/css/styles.css" />
+
+    <!-- google font so the home page matches the apod viewer styling -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <!-- header shared across the app: title + simple nav link into the viewer -->
     <header>
       <h1>nasa astronomy picture of the day</h1>
       <nav>
@@ -16,30 +21,47 @@
       </nav>
     </header>
 
+    <!-- landing page content lives inside this main container -->
     <main class="landing-main">
+      <!-- hero section: left side text, right side fun orbit graphic -->
       <section class="hero">
+        <!-- left column: intro text, tagline, and launch button -->
         <div class="hero-text">
+          <!-- small tag so it’s clear this is for the cmsc335 final -->
           <span class="hero-tag">cmsc335 final project</span>
-          <h2>explore space, one day at a time.</h2>
+
+          <!-- main headline for the landing page -->
+          <h2>explore space, one day at a time!</h2>
+
+          <!-- short description explaining what the app actually does -->
           <p class="hero-subtitle">
-            pick any date and see what nasa captured that day. save your favorite pictures of the
-            universe and build your own little space gallery.
+            pick any date and see what nasa captured that day. save your
+            favorite pictures of the universe and build your own little galaxy!
           </p>
 
+          <!-- primary call-to-action that sends the user to the viewer page -->
           <div class="hero-actions">
             <a class="primary-link" href="/apod">launch viewer</a>
-            <p class="hero-note">no account needed • powered by nasa apod api</p>
+            <p class="hero-note">
+              no account needed • powered by nasa apod api
+            </p>
           </div>
         </div>
 
+        <!-- right column: decorative card with spinning orbit and planet -->
         <div class="hero-card">
-          <div class="hero-card-header">today&apos;s glimpse of the cosmos</div>
+          <!-- small title for the card -->
+          <div class="hero-card-header">glimpse into the cosmos</div>
+
           <div class="hero-card-body">
+            <!-- orbit + planet elements are styled and animated in css -->
             <div class="hero-orbit"></div>
             <div class="hero-planet"></div>
+
+            <!-- quick hint about the date range nasa apod supports -->
             <p class="hero-card-text">
-              use the date picker on the viewer page to jump to any day since june 16, 1995 — the
-              first nasa apod.
+              use the date picker on the viewer page to travel to any day since
+              june 16, 1995!
             </p>
           </div>
         </div>
