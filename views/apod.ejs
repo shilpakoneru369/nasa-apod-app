@@ -4,7 +4,7 @@
     <title>nasa apod viewer</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -19,6 +19,11 @@
     <main>
       <section class="search-section">
         <h2>choose a date</h2>
+        <p class="section-caption">
+          nasa releases a new astronomy picture of the day every 24 hours. pick a date to see what
+          the universe looked like then.
+        </p>
+
         <form action="/apod/fetch" method="POST">
           <label for="date">date:</label>
           <input type="date" id="date" name="date" required />
@@ -31,20 +36,28 @@
 
         <% if (apod) { %>
         <div class="apod-card">
-          <h3><%= apod.title %> (<%= apod.date %>)</h3>
+          <div class="apod-card-header">
+            <div class="apod-meta">
+              <span class="pill pill-date"><%= apod.date %></span>
+              <span class="pill pill-type"><%= apod.mediaType === 'image' ? 'image' : 'video' %></span>
+            </div>
+            <h3><%= apod.title %></h3>
+          </div>
 
           <% if (apod.mediaType === 'image') { %>
           <img src="<%= apod.imageUrl %>" alt="astronomy picture of the day" />
           <% } else { %>
-          <p>this apod is a video. view it here:</p>
-          <a href="<%= apod.imageUrl %>" target="_blank" rel="noopener noreferrer">
-            open video
-          </a>
+          <div class="video-placeholder">
+            <p>this apod is a video. you can open it in a new tab:</p>
+            <a href="<%= apod.imageUrl %>" target="_blank" rel="noopener noreferrer">
+              open nasa apod video
+            </a>
+          </div>
           <% } %>
 
           <p class="explanation"><%= apod.explanation %></p>
 
-          <form action="/apod/save" method="POST">
+          <form class="apod-actions" action="/apod/save" method="POST">
             <input type="hidden" name="date" value="<%= apod.date %>" />
             <input type="hidden" name="title" value="<%= apod.title %>" />
             <input type="hidden" name="explanation" value="<%= apod.explanation %>" />
@@ -55,29 +68,43 @@
           </form>
         </div>
         <% } else { %>
-        <p>no picture selected yet. choose a date above.</p>
+        <div class="empty-state">
+          <p>no picture selected yet.</p>
+          <p>choose a date above to load your first nasa apod.</p>
+        </div>
         <% } %>
       </section>
 
       <section class="favorites-section">
         <h2>saved favorites</h2>
+        <p class="section-caption">
+          this list is stored in mongodb using mongoose. you can remove items at any time.
+        </p>
+
         <% if (favorites && favorites.length > 0) { %>
         <ul class="favorites-list">
           <% favorites.forEach(function (fav) { %>
           <li class="favorite-item">
-            <h3><%= fav.title %> (<%= fav.date %>)</h3>
+            <div class="favorite-header">
+              <span class="pill pill-date"><%= fav.date %></span>
+              <h3><%= fav.title %></h3>
+            </div>
+
             <% if (fav.mediaType === 'image' && fav.imageUrl) { %>
             <img src="<%= fav.imageUrl %>" alt="favorite apod" />
             <% } %>
 
-            <form action="/apod/delete/<%= fav._id %>" method="POST">
+            <form class="favorite-actions" action="/apod/delete/<%= fav._id %>" method="POST">
               <button type="submit">remove</button>
             </form>
           </li>
           <% }); %>
         </ul>
         <% } else { %>
-        <p>you have no saved favorites yet.</p>
+        <div class="empty-state">
+          <p>you haven&apos;t saved any favorites yet.</p>
+          <p>save a few apods you like and they&apos;ll show up here.</p>
+        </div>
         <% } %>
       </section>
     </main>
